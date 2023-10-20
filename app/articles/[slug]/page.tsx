@@ -14,9 +14,6 @@ import Category from '@/_components/Category';
 import Tags from '@/_components/Tags';
 import Cards from '@/_components/Cards';
 import PaidContents from '@/_components/PaidContents';
-import Paywall from '@/_components/Paywall';
-import { canViewPaidContents } from '@/_libs/paywall';
-
 type Props = {
   params: {
     slug: string;
@@ -69,11 +66,7 @@ export default async function Page({ params, searchParams }: Props) {
             return <RichEditor key={i} content={item.richEditor} />;
           }
           if (item.fieldId === 'paidContents') {
-            return canViewPaidContents() ? (
-              <PaidContents key={i} content={item.paidContents} />
-            ) : (
-              <Paywall key={i} />
-            );
+            return <PaidContents key={i} content={item.paidContents} />;
           }
           if (item.fieldId === 'ad' && item.ad) {
             return <Ad key={i} />;
