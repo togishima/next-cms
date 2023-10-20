@@ -13,6 +13,9 @@ import SearchField from '@/_components/SearchField';
 import Category from '@/_components/Category';
 import Tags from '@/_components/Tags';
 import Cards from '@/_components/Cards';
+import PaidContents from '@/_components/PaidContents';
+import Paywall from '@/_components/Paywall';
+import { canViewPaidContents } from '@/_libs/paywall';
 
 type Props = {
   params: {
@@ -64,6 +67,13 @@ export default async function Page({ params, searchParams }: Props) {
         {data.content.map((item, i) => {
           if (item.fieldId === 'richEditor') {
             return <RichEditor key={i} content={item.richEditor} />;
+          }
+          if (item.fieldId === 'paidContents') {
+            return canViewPaidContents() ? (
+              <PaidContents key={i} content={item.paidContents} />
+            ) : (
+              <Paywall key={i} />
+            );
           }
           if (item.fieldId === 'ad' && item.ad) {
             return <Ad key={i} />;

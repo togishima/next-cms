@@ -22,7 +22,7 @@ export type Category = {
 export type Article = {
   title: string;
   description: string;
-  content: (RichEditor | Ad)[];
+  content: (RichEditor | Ad | PaidContents)[];
   thumbnail: MicroCMSImage;
   tags: Tag[];
   category: Category | null;
@@ -40,6 +40,12 @@ export type RichEditor = {
 export type Ad = {
   fieldId: 'ad';
   ad: boolean;
+};
+
+// カスタムフィールド > 有料コンテンツの型定義
+export type PaidContents = {
+  fieldId: 'paidContents';
+  paidContents: string;
 };
 
 // ランキングの型定義
